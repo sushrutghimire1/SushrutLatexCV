@@ -1,0 +1,377 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=1.5 cm, % seperation between body and page edge from the left
+    right=1.5 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath, amssymb} % for math
+\usepackage[
+    pdftitle={CV_sushrut},
+    pdfauthor={Sushrut},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=blue
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+\usepackage{graphicx} % for including images
+\usepackage{eso-pic} % for absolute positioning
+\usepackage{geometry} % to set the page margins
+
+
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\text{\small Ghimire - Page \thepage{} of \pageref*{LastPage}}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 10 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+
+\begin{document}
+
+\begin{tabularx}{\textwidth}{l X}
+    % Insert the image on the left
+    \includegraphics[width=3.75cm, height=3.75cm]{image1.jpeg} & % Adjust image dimensions as needed
+    
+    % Insert name at the top and contact information below
+    \begin{minipage}{\textwidth}
+        % Name at the top, aligned slightly higher
+        \vspace{-3.5cm} % Adjust vertical spacing to move name higher
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont Sushrut Ghimire} \vspace{0.3cm} %
+        
+        %\renewcommand{\arraystretch}{1.2} % Adjust row height here
+        \begin{tabular}{@{}p{0.5\textwidth} 
+        p{0.5\textwidth}@{}}
+        \href{x}{\color{black}{\footnotesize\faPhone*} \hspace*{0.13cm} (+49) 163 774 66 88} & 
+        \href{x}{\color{black}{\footnotesize\faMapMarker*} \hspace*{0.13cm} Erlangen, Germany} \\[0.2cm]
+        
+        \href{mailto:sushrutghimire1@gmail.com}{sushrutghimire1@gmail.com} & \href{x}{\color{black} Nationality: Nepalese} \\[0.2cm]
+        
+        \href{https://www.linkedin.com/in/sushrut-ghimire/}{{\color{black}{\footnotesize\faLinkedinIn}} \hspace*{0.13cm} in/sushrutghimire} & 
+        \href{https://www.sushrutghimire.com.np/}{{\color{black}{\footnotesize\faGlobe}} \hspace*{0.13cm} sushrutghimire.com} \\
+        \end{tabular}
+    \vspace{0.1cm} \\
+    Computer engineer and master's student with practical experience in data science, \\ and web development, committed to optimize projects  through his expertise.
+    \end{minipage}
+\end{tabularx}
+
+    \vspace{0.3 cm - 0.3 cm}
+
+ \section{Education}
+
+
+
+        
+        \begin{twocolentry}{
+            
+            
+        \text{Oct 2024} – \textit{present}
+
+        \text{}
+        }
+            \textbf{Friedrich Alexander University}
+        
+            \href{https://www.fau.eu/studiengang/data-science-msc/}{\textit{MSc Data Science}}
+
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                {\color{black}{\normalsize\raisebox{-0.5em}{\includegraphics[height=1.5em]{book.png}} \hspace*{0.13cm} \textit{Specialization} (Artificial Intelligence, Machine Learning, Pattern Recognition, Deep Learning, Discrete Optimization)}}
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+        
+        \begin{twocolentry}{
+            
+            
+        \text{2017-2021}
+        
+        \text{Equivalent Grade: 2.1}}
+            \textbf{Vellore Institute of Technology}
+        
+            \href{https://vit.ac.in/schools/school-of-computer-science-and-engineering}{\textit{BE in Computer Science and Engineering}} 
+
+        \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                {\color{black}{\normalsize\raisebox{-0.5em}{\includegraphics[height=1.5em]{diploma-roll.png}} \hspace*{0.13cm} Data Structures, Algorithms, Programming, Digital Logic, Web Development, Computer Architecture }}
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+        
+        \begin{twocolentry}{
+            
+            
+        \text{2017}
+        
+        \text{Equivalent Grade: 1.8}}
+            \textbf{Central Board of Secondary Education}
+        
+            \href{https://www.cbse.gov.in/cbsenew/cbse.html}{\textit{Intermediate}} 
+
+        \end{twocolentry}
+
+
+\section{Technical Proficiencies}
+
+\textbf{Web Development:} Java (Springboot), SQL, ReactJs, Javascript
+
+\vspace{0.2 cm}
+
+\textbf{Data Science and Analytics:}  Machine Learning (scikit-learn, statsmodel),Data Analysis, Workflow Automation, Process Modeling, Comparative Analysis, PowerBI, Tableau, Snowflake, Snowpark, Alteryx
+
+\vspace{0.2 cm}
+
+\textbf{Automation and Development Tools:} Git, Camunda, SSIS, New Relic, ElasticSearch
+
+
+
+\section{Experiences}
+
+\begin{twocolentry}{
+\textit{Noida, IN}    
+
+\textit{Aug} \text{2021} – \textit{Sep} \text{2024}}
+    \textbf{Professional, Data Analysis}
+    
+    \href{https://www.fiserv.com/}{\textit{Fiserv Inc.}}
+    
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Fully automated forecasting of volumes for optimizing operations (capacity, inventory, production and demand) using advanced forecasting models like LSTM and Prophet, through pipeline in Snowpark (Snowflake) for Fiserv Output Solutions.  
+        \item Developed and managed cross-functional data pipelines, integrating data from Snowflake, and Alteryx to migrate data from 6+ banking platforms for automated conversion
+        \item Improved efficiency of Fiserv's Clover Capital product through feature engineering and building binary prediction model that recommends delinquent merchants instead of a simple rule-based 'pre-approved' list 
+        \item Real-Time Fraud Detection of Billpay transaction frauds using boosted trees for Fiserv's Billmatrix product
+        \item Real-time Indexing of software vulnerability by using statistical methods like fisher index
+        \item Enhanced financial reporting processes by implementing SQL-based stored procedures, views, and data validation checks, ensuring data relevance and accuracy in PowerBI reporting
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\textit{Chennai, IN}    
+
+\textit{Mar} \text{2021} – \textit{June} \text{2021} \textit{(internship)}}
+    \textbf{Software Engineering Intern}
+    
+    \href{https://www.paperflite.com/}{\textit{Paperflite Marketing Technology Pvt. Ltd.}}
+    
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Enhanced backend automation and data management processes using ReactJS, Spring Boot, and ElasticSearch, improving client data accessibility and usability
+        \item Developed an automated monitoring and log management system using New Relic, achieving real-time visibility into data processing workflows
+        \item Built a lead management tool integrating REST APIs, which streamlined inter-departmental communication and task tracking across locations
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+\textit{Kathmandu, NP}    
+
+\textit{Aug} \text{2020} – \textit{Jan} \text{2021} \textit{(trainee)}}
+    \textbf{Java Developer}
+
+    \href{https://citytechgroup.com/}{\textit{Citytech Group Pvt. Ltd.}}
+    
+\end{twocolentry}
+
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Developed core modules for a financial trading application using Java, JAX-RS, and REST APIs, contributing to backend automation for financial reporting and ReactJs for frontend UI
+        \item Designed optimized database structures to support high-frequency trading, focusing on scalability and performance to ensure accurate reporting
+        \item Utilized workflow automation tools and version control (Git), supporting efficient data handling and system integration across multiple project locations
+    \end{highlights}
+\end{onecolentry}
+
+
+
+
+
+
+\section{Academic Projects}
+
+\begin{onecolentry}
+    Custom Tokenization of Sanskrit Legal Texts for Enhancing Large Language Model (LLM) Accuracy, improving NLP processing efficiency in complex linguistic datasets
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    Face Recognition-Based Attendance System using Python and Convolutional Neural Networks (CNN), deployed as a scalable web application for educational institutions in India
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    Binary Classification Model for Fraud Detection in Financial Transactions, developed to replace traditional rule-based methods with higher accuracy and predictive reliability
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    Blockchain-Enabled KYC System on Ethereum, utilizing Solidity to ensure secure and tamper-proof customer data handling for regulatory compliance
+\end{onecolentry}
+
+
+
+\section{Outreach}
+
+\begin{onecolentry}
+    \textbf{Participant:} Fiserv Global Hackathon Winner, developed a machine learning-based ‘Cognitive Banking’ solution for personalized financial services
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{Finalist:} IEEE SSIT Hack4Cause, developed an ML-based application connecting volunteers with senior citizens for daily assistance
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{onecolentry}
+    \textbf{Awardee:} Compex Scholarship from Indian Embassy, awarded top rank for B.Tech studies in India
+\end{onecolentry}
+
+
+
+    \section{Language}
+
+    
+        \begin{tabularx}{\textwidth}{X X X}
+            \textbf{German} & \textbf{English} & \textbf{Nepali, Hindi} \\
+            Begineer, A1 level & Bilingual proficiency & Native \\
+        \end{tabularx}
+
+    \vspace{0.5 cm}
+    
+    I certify that all information in this CV is true, complete, and accurate to the best of my knowledge. I understand that any misrepresentation or falsification of facts may result in consequences, and I accept full responsibility for the accuracy of this document.
+
+    \hfill
+    \includegraphics[width=9cm]{signature.png} % Adjust width as needed
+\end{document}
